@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="static/bootstrap.min.css">
+    <script src="static/socket.io.slim.js"></script>
+    <script src="static/jquery-3.3.1.min.js"></script>
+    <script src="static/lodash.min.js"></script>
+
+    <title>Vehicle Monitor</title>
+
+</head>
+<body>
+
+<div id="speed" class="text-center">
+<div id="preview-textfield" style="font-size: 24px;" class="preview-textfield reset"></div>
+<canvas width=760 height=300 id="gauge"></canvas>
+</div>
+
+<div id="break" class="text-center">
+    <input type="image" id="car-break" src="static/break.png"/>
+</div>
+
+<div id="steering" class="container" style="margin-left:26%;">
+    <p style="margin-left:22%;">Value: <span id="steering-value"></span></p>
+    <input type="range" min="1" max="100" value="50" class="slider" id="myRange" style="width: 50%; vertical-align: middle;">
+</div>
+
+
+</body>
+<script src="static/index.js"></script>
+
+<script>
+
+
+
+</script>
+
+</html>
