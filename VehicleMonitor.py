@@ -29,7 +29,7 @@ def background_thread():
 
 @app.route('/')
 def hello_world():
-    return send_file('static/index.html')
+    return render_template('index.html')
 
 
 @socketio.on('slider', namespace='/api')
