@@ -7,6 +7,29 @@ $(document).ready(function () {
         var gauge = $("#speed");
         gauge.val(msg.speed);
         gauge.trigger("change");
+
+        $("#acc").text(msg.accelerator);
+        $("#break").text(msg.break);
+        var leftlight = $("#leftlight button");
+        var rightlight = $("#rightlight button");
+        leftlight.css("background-color","white");
+        rightlight.css("background-color","white");
+        if (msg.light == "L") {
+            leftlight.css("background-color","red");
+        } else if (msg.light == "R") {
+            rightlight.css("background-color","red");
+        }
+
+        for (var i = 1 ; i < 5; i++) {
+            var gear = $("#gear button:nth-child(" + i + ")")
+            gear.css("background-color","white");
+            if (gear.text() == msg.gear) {
+                gear.css("background-color","red");
+            }
+        }
+
+        
+        
     });
     var output = document.getElementById("steering-value");
     var slider = document.getElementById("myRange");

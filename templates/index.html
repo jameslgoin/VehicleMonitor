@@ -2,6 +2,7 @@
 <html>
 <head>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
     <link href="{{ url_for('static', filename='css/speedometer.css') }}" rel="stylesheet">
     <script src="{{ url_for('static', filename='js/socket.io.slim.js') }}"></script>
     <script src="{{ url_for('static', filename='js/jquery-3.3.1.min.js') }}"></script>
@@ -13,21 +14,45 @@
 </head>
 <body>
 
-<div id="speed" class="text-center">
-    <input type="hidden" id="speed" value="20">
-</div>
+    <div id="container">
+        <div class="row">
+            <div id="leftlight" class="col-md-2">
+                <button button type="button" class="btn btn-default btn-block" disabled>Left</button>
+            </div>
+            <div id="speeddiv" class="text-center col-md-4">
+                <input type="hidden" id="speed" value="20">
+            </div>
+            <div id="gear" class="col-md-2"> 
+                <button type="button" value="P" class="btn btn-default btn-block" disabled>P</button>
+                <button type="button" value="R" class="btn btn-default btn-block" disabled>R</button>
+                <button type="button" value="N" class="btn btn-default btn-block" disabled>N</button>
+                <button type="button" value="D" class="btn btn-default btn-block" disabled>D</button>
+            </div>
+            <div id="rightlight" class="col-md-2">
+                <button type="button" class="btn btn-default btn-block" disabled>Right</button>
+            </div>
+        </div>
+        <div class="row">
+            <div id="pedal" class="col-md-3">
+                <p>Accelerator Position: <span id="acc"></span> </p>
+                <p>Break Position: <span id="break"></span></p>
+            </div>
+            <div id="break" class="text-center col-md-4">
+                <input type="image" id="car-break" src="{{ url_for('static', filename='img/break.png') }}"/>
+            </div>
+        
+            <div id="steering" class="container col-md-4" style="margin-left:26%;">
+                <p style="margin-left:22%;">Value: <span id="steering-value"></span></p>
+                <input type="range" min="1" max="100" value="50" class="slider" id="myRange"
+                    style="width: 50%; vertical-align: middle;">
+            </div>
+        </div>
+    </div>
+    
 
-<div id="break" class="text-center">
-    <input type="image" id="car-break" src="{{ url_for('static', filename='img/break.png') }}"/>
-</div>
-
-<div id="steering" class="container" style="margin-left:26%;">
-    <p style="margin-left:22%;">Value: <span id="steering-value"></span></p>
-    <input type="range" min="1" max="100" value="50" class="slider" id="myRange"
-           style="width: 50%; vertical-align: middle;">
-</div>
 
 
+    
 </body>
 <script src="{{ url_for('static', filename='js/index.js') }}"></script>
 
