@@ -1,10 +1,11 @@
+import eventlet
+eventlet.monkey_patch()
+
 from flask import Flask, render_template, send_file
 from flask_socketio import SocketIO, send, emit
 import Aggregator
-import eventlet
 import signal
 
-eventlet.monkey_patch()
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'This is supposed to be a secret!'

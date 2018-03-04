@@ -1,6 +1,6 @@
 import shlex
 import threading
-import eventlet
+import time
 from subprocess import PIPE, Popen
 DEBUG_TESTING = True
 
@@ -27,7 +27,6 @@ class Aggregator(object):
         def func():
             proc = Popen(args, stdout=PIPE)
             while True:
-                eventlet.sleep()  # this is for concurrent in socketio, otherwise this will block forever
                 line = proc.stdout.readline().decode()
                 if len(line) > 1:
                     kv = line.split(separator)
@@ -58,4 +57,4 @@ if __name__ == '__main__' and DEBUG_TESTING:
     agg.start_gathering()
     while True:
         print(agg.get_content())
-        eventlet.sleep(1)
+        time.sleep(1)
