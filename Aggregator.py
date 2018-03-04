@@ -1,9 +1,7 @@
 import shlex
-
+import threading
 import eventlet
-from eventlet.green import threading
-eventlet.monkey_patch()
-from eventlet.green.subprocess import PIPE, Popen
+from subprocess import PIPE, Popen
 DEBUG_TESTING = True
 
 
@@ -29,13 +27,11 @@ class Aggregator(object):
         def func():
             proc = Popen(args, stdout=PIPE)
             while True:
-                print('here in AGG new loop')    
+                eventlet.sleep()  # this is for concurrent in socketio, otherwise this will block forever
                 line = proc.stdout.readline().decode()
                 if len(line) > 1:
                     kv = line.split(separator)
                     self.content[kv[0]] = kv[1][:-1]
-                print('content : '+ str(self.content) )
-                eventlet.sleep()
                 if len(line) <= 1:
                     return 
         self.components.append(func)
@@ -51,7 +47,6 @@ class Aggregator(object):
             th = threading.Thread(target=func, daemon=True)
             th.start()
             self.thread_pool.append(th)
-        
 
     def get_content(self):
         return self.content
@@ -59,7 +54,7 @@ class Aggregator(object):
 
 if __name__ == '__main__' and DEBUG_TESTING:
     agg = Aggregator()
-    agg.register_component("/bin/bash /home/pi//vehicle_monitor/SocketCandecodeSignals/server/test.sh")
+    agg.register_component("python3 /Users/hht/Documents/VehicleMonitor/test.py")
     agg.start_gathering()
     while True:
         print(agg.get_content())

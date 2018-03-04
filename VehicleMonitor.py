@@ -1,14 +1,13 @@
 from flask import Flask, render_template, send_file
-from flask_socketio import SocketIO
-from flask_socketio import send, emit
-import random
+from flask_socketio import SocketIO, send, emit
 import Aggregator
 import eventlet
+import signal
+
 eventlet.monkey_patch()
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'This is supposed to be a secret!'
-socketio = SocketIO(app)
 app.config['DEBUG'] = True
 
 #turn the flask app into a socketio app
@@ -25,7 +24,7 @@ def background_thread():
         content = aggregator.get_content()
         print(content)
         socketio.emit('newdata', content, namespace='/api')
-        socketio.sleep(1)
+        socketio.sleep(0.5)
 
 
 @app.route('/')
@@ -50,11 +49,12 @@ def connect():
     global aggregator
     if thread is None:
         aggregator = Aggregator.Aggregator()
-        aggregator.register_component("python3 /home/pi/vehicle_monitor/SocketCandecodeSignals/server/test.py")
+        aggregator.register_component("python3 /Users/hht/Documents/VehicleMonitor/test.py")
         aggregator.start_gathering()
         print('thread init')
         thread = socketio.start_background_task(target=background_thread)
 
 
 if __name__ == '__main__':
+    signal.signal(signal.SIGINT, exit)
     socketio.run(app, host='0.0.0.0', port=8080)
