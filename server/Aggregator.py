@@ -53,7 +53,7 @@ class Aggregator(object):
 
 if __name__ == '__main__' and DEBUG_TESTING:
     agg = Aggregator()
-    agg.register_component("python3 /Users/hht/Documents/VehicleMonitor/test.py")
+    agg.register_component("/bin/bash /home/pi/vehicle_monitor/getCAN.sh")
     agg.start_gathering()
     while True:
         print(agg.get_content())

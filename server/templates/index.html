@@ -32,20 +32,40 @@
                 <button type="button" class="btn btn-default btn-block" disabled>Right</button>
             </div>
         </div>
-        <div class="row">
+        <div class="row">			
             <div id="pedal" class="col-md-3">
                 <p>Accelerator Position: <span id="acc"></span> </p>
-                <p>Break Position: <span id="break"></span></p>
+                <p>Brake Position: <span id="brake"></span></p>
+                <p>Battery SOC : <span id="soc"></span>%</p>
+                <p>GPS Lat:  <span id="lat"></span></p>
+                <p>GPS Lon: <span id="lon"></span></p>
+                
             </div>
+
+                
+            <!--
             <div id="break" class="text-center col-md-4">
                 <input type="image" id="car-break" src="{{ url_for('static', filename='img/break.png') }}"/>
             </div>
-        
+			-->
+			<!--
             <div id="steering" class="container col-md-4" style="margin-left:26%;">
                 <p style="margin-left:22%;">Value: <span id="steering-value"></span></p>
                 <input type="range" min="1" max="100" value="50" class="slider" id="myRange"
                     style="width: 50%; vertical-align: middle;">
             </div>
+            -->
+        </div>
+        <div class="row">
+			<p style="text-align:middle;">Steering Wheel Angle: <span id="wheel"></span></p>
+        </div>
+        
+        <div class = "row" style="margin:50px;"> 
+			<img id="wheel_img" src="{{ url_for('static', filename='img/wheel.jpg') }}" width="240px" height="240px" style="display:block;margin-left:auto;margin-right:auto;">      
+		</div>
+		
+        
+        
         </div>
     </div>
     

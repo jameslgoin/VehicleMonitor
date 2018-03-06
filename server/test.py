@@ -15,4 +15,4 @@ while True:
     print('gear:%s' % get_gear(), flush=True)
     print('accelerator:%f' % get_acc(), flush=True)
     print('break:%f' % get_break(), flush=True)
-    time.sleep(1)
+    time.sleep(0.01)

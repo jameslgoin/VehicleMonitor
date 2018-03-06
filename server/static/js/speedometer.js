@@ -27,7 +27,7 @@ $.fn.myfunc = function (userPref) {
     noOfSmallDiv        : 2,           /**no of small div between main div*/
     eventListenerType   : 'change',    /**type of event listener*/
     multiplier          : 1,	       /**Center value multiplier e.g. 1 x 1000 RPM*/	
-    gagueLabel   	: 'km/h'       /**Label on guage Face*/	
+    gagueLabel   	: 'mph'       /**Label on guage Face*/	
   }
   if(typeof userPref === 'object')
   for (var prop in userPref)this.defaultProperty[prop] = userPref[prop];
