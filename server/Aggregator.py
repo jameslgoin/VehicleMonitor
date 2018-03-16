@@ -1,4 +1,3 @@
-import shlex
 import threading
 import time
 from subprocess import PIPE, Popen
@@ -23,16 +22,12 @@ class Aggregator(object):
         :param delimiter: the separator that distinguish different kv pairs
         :return: none
         """
-        args = shlex.split(command)
         def func():
-            proc = Popen(args, stdout=PIPE)
-            while True:
-                line = proc.stdout.readline().decode()
+            proc = Popen(command, stdout=PIPE, universal_newlines=True, shell=True)
+            for line in proc.stdout:
                 if len(line) > 1:
                     kv = line.split(separator)
                     self.content[kv[0]] = kv[1][:-1]
-                if len(line) <= 1:
-                    return 
         self.components.append(func)
 
     def start_gathering(self):
@@ -53,7 +48,7 @@ class Aggregator(object):
 
 if __name__ == '__main__' and DEBUG_TESTING:
     agg = Aggregator()
-    agg.register_component("/bin/bash /home/pi/vehicle_monitor/getCAN.sh")
+    agg.register_component("python3 ./test.py")
     agg.start_gathering()
     while True:
         print(agg.get_content())

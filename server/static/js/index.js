@@ -1,8 +1,18 @@
-var UPDATE_INTERVAL = 500;
 $(document).ready(function () {
     $("#speed").myfunc({divFact:10});
 
     var socket = io.connect('http://' + document.domain + ':' + location.port + '/api');
+    var startTime;
+
+    setInterval(function () {
+        startTime = Date.now();
+        socket.emit('pping', null);
+    }, 1000);
+
+    socket.on('ppong', function() {
+        $("#latency").text((Date.now() - startTime) + ' ms');
+    });
+
     socket.on('newdata', function (msg) {
         var gauge = $("#speed");
         gauge.val(msg.VehSpdAvgDrvn);
@@ -18,14 +28,11 @@ $(document).ready(function () {
         $("#soc").text(msg.EngOilRmnLf);
         $("#lat").text(msg.PsngSysLat);
         $("#lon").text(msg.PsngSysLong);
-        $("#wheel").text(msg.StrWhAng);
-        
-	if(msg.StrWhAng != undefined && msg.StrWhAng != null) {
-                if (!msg.StrWhAng.startsWith('-')) {
-                    msg.StrWhAng = '-' +  msg.StrWhAng;
-                } else {
-                    msg.StrWhAng = msg.StrWhAng.substring(1);
-                }
+
+
+	    if(msg.StrWhAng != undefined && msg.StrWhAng != null) {
+            msg.StrWhAng = msg.StrWhAng.startsWith('-') ? msg.StrWhAng.substring(1) : '-' +  msg.StrWhAng;
+            $("#wheel").text(msg.StrWhAng);
         	$("#wheel_img").css('transform', 'rotate(' + msg.StrWhAng + 'deg)');
         }
 
@@ -76,4 +83,3 @@ $(document).ready(function () {
  //       accumulator = 0;
  //   }
 });
-

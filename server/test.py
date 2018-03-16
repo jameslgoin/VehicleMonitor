@@ -3,16 +3,24 @@ import random, time
 
 
 get_speed = lambda : random.randint(0,180)
-get_light = lambda : random.choice(['L', 'N', 'R'])
-get_gear = lambda : random.choice(['P', 'R', 'N', 'D'])
-get_acc = lambda : random.uniform(0, 1)
-get_break = lambda : random.uniform(0, 1)
+get_0_1 = lambda : random.uniform(0, 1)
+get_string = lambda : 'Random String ' + random.randint(0,1000)
+get_pos = lambda : random.randint(100000,1000000)
+get_whl = lambda : random.randint(-180,180)
+
 
 
 while True:
-    print('speed:%i' % get_speed(), flush=True)
-    print('light:%s' % get_light(), flush=True)
-    print('gear:%s' % get_gear(), flush=True)
-    print('accelerator:%f' % get_acc(), flush=True)
-    print('break:%f' % get_break(), flush=True)
-    time.sleep(0.01)
+    print('VehSpdAvgDrvn:%i' % get_speed())
+    print('AccPos:%f' % get_0_1())
+    print('BrkPdlPos:%f' % get_0_1())
+    print('EngOilRmnLf:%f' % get_0_1())
+
+    print('PsngSysLat:%i' % get_pos())
+    print('PsngSysLong:%i' % get_pos())
+
+    print('StrWhAng:%i' % get_whl())
+    print('TrnSwAct:%i' % random.choice([1,2]))
+    print('TrnsShftLvrPos:%i' % random.choice([1, 2, 3, 4]), flush=True)
+
+    time.sleep(1)
