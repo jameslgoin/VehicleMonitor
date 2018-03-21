@@ -43,7 +43,7 @@ class Aggregator(object):
             self.thread_pool.append(th)
 
     def get_content(self):
-        return self.content
+        return self.content.copy()
 
 
 if __name__ == '__main__' and DEBUG_TESTING:

@@ -15,7 +15,7 @@
 <body>
 
     <div id="container">
-        <div class="row">
+        <div class="row" style="text-align:center;">
             <div id="leftlight" class="col-md-2">
                 <button button type="button" class="btn btn-default btn-block" disabled>Left</button>
             </div>
@@ -57,12 +57,13 @@
             </div>
             -->
         </div>
+
         <div class="row">
-			<p style="text-align:middle;">Steering Wheel Angle: <span id="wheel"></span></p>
+			<p style="text-align:center;">Steering Wheel Angle: <span id="wheel"></span></p>
         </div>
         
         <div class = "row" style="margin:50px;"> 
-			<img id="wheel_img" src="{{ url_for('static', filename='img/wheel.jpg') }}" width="240px" height="240px" style="display:block;margin-left:auto;margin-right:auto;">      
+			<img id="wheel_img" src="{{ url_for('static', filename='img/wheel.jpg') }}" width="240px" height="240px" style="display:block;margin-left:auto;margin-right:auto;">
 		</div>
 		
         
